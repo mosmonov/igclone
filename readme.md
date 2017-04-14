@@ -18,4 +18,8 @@
 
 ## Documentation
 
-### Placeholder
+### API Routes
+
+### DB Schema
+
+### Front End Framework
