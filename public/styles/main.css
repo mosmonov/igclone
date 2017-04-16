@@ -1,0 +1,16 @@
+.label {
+	padding: 20px;
+	font-size: 20px;
+	font-family: sans-serif;
+}
+a {
+	color: white;
+}
+a:hover {
+	text-decoration: none;
+}
+.js-sign-in {
+	color: white;
+	padding: 5px 10px;
+	font-size: 20px;
+}
