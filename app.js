@@ -1,15 +1,19 @@
 const express = require('express')
 const app = express();
-const bodyParser = require('body-parser');
+const parser = require('body-parser');
 const port = 3001;
 const morgan = require('morgan');
+const db = require('sqlite');
+
+//                  db integration
+//————————————————————————————————————————————————
+const DB_NAME = './data/db.sqlite';
 
 //                  middleware
 //————————————————————————————————————————————————
 app.use(express.static('public'));
 app.use(morgan('dev'));
-app.use(bodyParser.json());
-
+app.use(parser.json());
 
 //                external routes
 //————————————————————————————————————————————————
@@ -26,6 +30,13 @@ app.use('/api', api);
 //                   routes
 //————————————————————————————————————————————————
 
+/*
+  TODO
+  ...
+  ...
+  ...
+*/
+
 app.get('/', (req, res) => {
   //render page placeholder
   res.send('Hi');
@@ -34,6 +45,9 @@ app.get('/', (req, res) => {
 //                 start
 //————————————————————————————————————————————————
 
-app.listen(port, ()=>{
-  console.log('Server running on port: '  + port);
-})
+Promise.resolve()
+  .then(() => db.open(DB_NAME, { Promise }))
+  .then(() => db.migrate({ force : 'last' }))
+  .then(app.listen(port))
+  .then(()=> { console.log('Server running on port: '  + port) })
+  .catch( err => console.error(err.stack))

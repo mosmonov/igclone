@@ -21,9 +21,26 @@
 		<span class="label label-success profile"> <a href="profile.html">Profile </a></span>
 		<span class="label label-info feed"> <a href="feed.html">Feed </a></span>
  		<button type="button" class="btn label-danger navbar-btn navbar-right js-sign-in"> Sign in</button>
-
  	  </div>  <!-- container-->
-    </nav>
+  </nav>
+	<main>
+		<!-- div container hidden but appears as overlay togggled by login button -->
+		<div id="loginContainer">
+			<form action="/login" method="post">
+	    <div>
+	        <label>Username:</label>
+	        <input type="text" name="username"/>
+	    </div>
+	    <div>
+	        <label>Password:</label>
+	        <input type="password" name="password"/>
+	    </div>
+	    <div>
+	        <input type="submit" value="Log In"/>
+	    </div>
+		</form>
+		</div>
+	</main>
 
 
 
