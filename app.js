@@ -1,39 +1,54 @@
 const express = require('express')
 const app = express();
-const bodyParser = require('body-parser');
+const parser = require('body-parser');
 const port = 3001;
 const morgan = require('morgan');
+const db = require('sqlite')
+
+//                  db integration
+//————————————————————————————————————————————————
+const DB_NAME = './data/db.sqlite'; // defines db filepath + filename
 
 //                  middleware
 //————————————————————————————————————————————————
-app.use(express.static('public'));
-app.use(morgan('dev'));
-app.use(bodyParser.json());
 
+app.use('/', express.static('./public'));
+app.use(morgan('dev'));
+app.use(parser.json());
 
 //                external routes
 //————————————————————————————————————————————————
 
-// login route using passport for authentication
-const login = require('./routes/login');
+const api = require('./routes/api'); // going to create some sort of super-admin route to view all data, ya heard?
+app.use('/api', api);
+
+const login = require('./routes/login'); // routes for login and signup.
 app.use('/login', login);
 
-// api route
-const api = require('./routes/api');
-app.use('/api', api);
+const profile = require('./routes/profile'); // route for viewing own profile and signup.
+app.use('/profile', profile);
+
+const posts = require('./routes/posts'); // route CRUD functions for posts
+app.use('/posts', posts);
 
 
 //                   routes
 //————————————————————————————————————————————————
 
-app.get('/', (req, res) => {
-  //render page placeholder
-  res.send('Hi');
+app.get('/', (req,res) => {
+  // if user logged in, render followed users
+    // else prompt login
 })
 
 //                 start
 //————————————————————————————————————————————————
 
-app.listen(port, ()=>{
-  console.log('Server running on port: '  + port);
-})
+
+// V IMPORTANT STUFF
+// Sqlite statements return promises so to start things off we inialize the db session and if needed, clear previous data
+Promise.resolve()
+  .then(() => db.open(DB_NAME, { Promise })) // starts DB Session
+  // .then(() => db.migrate({ force : 'last' })) // uncomment to reset db
+  .then(app.listen(port)) // start server
+  .then(()=> { console.log('Server running on port: '  + port) })
+  .catch(err => console.error(err.stack))

@@ -14,8 +14,6 @@
 
 > Database & Model Logic
 
-
-
 ## Documentation
 
 ### API Routes
