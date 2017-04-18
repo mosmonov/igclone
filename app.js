@@ -5,7 +5,6 @@ const port = 3001;
 const morgan = require('morgan');
 const db = require('sqlite')
 
-
 //                  db integration
 //————————————————————————————————————————————————
 const DB_NAME = './data/db.sqlite'; // defines db filepath + filename
@@ -26,8 +25,19 @@ app.use('/api', api);
 const login = require('./routes/login'); // route for login and signup.
 app.use('/login', login);
 
+const profile = require('./routes/profile'); // route for login and signup.
+app.use('/profile', profile);
+
 //                   routes
 //————————————————————————————————————————————————
+
+app.get('/', (req,res)=>{
+  // if user logged in, render followed users
+    // else prompt login
+
+})
+
+
 
 
 
