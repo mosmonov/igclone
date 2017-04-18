@@ -55,13 +55,12 @@ login.post('/signup', (req, res) => {
         db.get("SELECT * FROM Users")
           .then(() => {
             db.exec(`INSERT INTO Users (email, password) VALUES ('${username}','${password}')`)
-          })
-          .then(() => {
             res.redirect('/')
           })
           .catch(err => console.log(err.stack))
         }
     })
+    .catch(err => console.log(err.stack))
   }
 });
 

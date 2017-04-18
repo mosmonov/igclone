@@ -22,24 +22,23 @@ app.use(parser.json());
 const api = require('./routes/api'); // going to create some sort of super-admin route to view all data, ya heard?
 app.use('/api', api);
 
-const login = require('./routes/login'); // route for login and signup.
+const login = require('./routes/login'); // routes for login and signup.
 app.use('/login', login);
 
-const profile = require('./routes/profile'); // route for login and signup.
+const profile = require('./routes/profile'); // route for viewing own profile and signup.
 app.use('/profile', profile);
+
+const posts = require('./routes/posts'); // route CRUD functions for posts
+app.use('/posts', posts);
+
 
 //                   routes
 //————————————————————————————————————————————————
 
-app.get('/', (req,res)=>{
+app.get('/', (req,res) => {
   // if user logged in, render followed users
     // else prompt login
-
 })
-
-
-
-
 
 //                 start
 //————————————————————————————————————————————————
