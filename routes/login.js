@@ -3,6 +3,13 @@ const login = express.Router();
 const db = require('sqlite')
 const parser = require('body-parser');
 
+const passport = require('../middleware/auth');
+// passport options
+const options = { successRedirect : '/api/users',
+                  failureRedirect : '/bad-login'
+                }
+
+
 // middleware
 login.use(parser.urlencoded({
     extended: true
@@ -12,20 +19,21 @@ login.use(parser.json());
 // base url of route /login
 
 // user login route
-login.post('/', (req, res) => {
-  // pull form values from post request
-  const username = req.body.username;
-  const password = req.body.password;
+login.post('/', passport.authenticate('local', options), (req, res) => {
 
-  console.log("login params: " + username + " " + password);
-  // get list of users //
-  db.get(`SELECT * FROM Users WHERE email LIKE '${username}'`) // throws error that it can't find "column = username"
-    .then(v => {
-      /* if statement logic to ensure password is correct serialize user into session with passport */
-      res.header('Content-Type','application/json');
-      res.send({ users : v })
-    })
-    .catch(err => console.log(err.stack))
+  // pull form values from post request
+  // const username = req.body.username;
+  // const password = req.body.password;
+  //
+  // console.log("login params: " + username + " " + password);
+  // // get list of users //
+  // db.get(`SELECT * FROM Users WHERE email LIKE '${username}'`) // throws error that it can't find "column = username"
+  //   .then(v => {
+  //     /* if statement logic to ensure password is correct serialize user into session with passport */
+  //     res.header('Content-Type','application/json');
+  //     res.send({ users : v })
+  //   })
+  //   .catch(err => console.log(err.stack))
 });
 
 // user signup route
