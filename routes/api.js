@@ -14,6 +14,17 @@ api.get('/users', (req, res) => {
 
 });
 
+api.get('/posts', (req, res) => {
+  // get list of posts //
+  db.all('SELECT * FROM Posts')
+    .then(v => {
+      console.log(v)
+      return res.send(v)
+    })
+    .catch(err => console.log(err.stack))
+
+});
+
 api.get('/follows', (req, res) => {
   // get list of followers table //
   db.all('SELECT * FROM Follows')
