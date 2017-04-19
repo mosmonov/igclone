@@ -48,11 +48,11 @@ posts.post('/create', (req, res) => {
 // get posts of followed users
 posts.get('/:userid/feed', (req, res) => {
   // get list of users //
-  db.all(`SELECT id * FROM Users`)
+  db.all(`SELECT followed * FROM follows WHERE user_id = ?`, v)
     .then(v => {
       console.log(v)
       // return res.send(v)
-      return db.get('SELECT name post * FROM Users WHERE name = id and post = posts ', [id.lastid])
+      return db.get('SELECT post * FROM Posts WHERE name = id and post = posts ', [id.lastid])
     })
     .catch(err => console.log(err.stack))
 });

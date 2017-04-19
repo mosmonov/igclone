@@ -3,11 +3,13 @@ const login = express.Router();
 const db = require('sqlite')
 const parser = require('body-parser');
 
+
 // middleware
 login.use(parser.urlencoded({
     extended: true
 }));
 login.use(parser.json());
+
 
 // base url of route /login
 
@@ -17,9 +19,9 @@ login.post('/', (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
-  console.log("login params: " + username + " " + password);
+  // console.log("login params: " + username + " " + password);
   // get list of users //
-  db.get(`SELECT * FROM Users WHERE email LIKE '${username}'`) // throws error that it can't find "column = username"
+  db.get(`SELECT * FROM Users WHERE email LIKE ${username}`) // throws error that it can't find "column = username"
     .then(v => {
       /* if statement logic to ensure password is correct serialize user into session with passport */
       res.header('Content-Type','application/json');
