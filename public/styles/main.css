@@ -9,6 +9,27 @@ a {
 a:hover {
 	text-decoration: none;
 }
+#search {
+    float: right;
+    margin-top: 9px;
+    width: 250px;
+}
+
+.search {
+    width: 40%;
+    height: 30px;
+    position: relative;
+    left: 30%;
+    line-height: 20px;
+}
+
+.btn {
+    height: 33px;
+    position: absolute;
+    right: 0;
+    top: 2px;
+    border-radius:5px;
+}
 .js-sign-in {
 	color: white;
 	padding: 5px 10px;

@@ -54,12 +54,12 @@
 			e.preventDefault();
 
 			const name=document.querySelector('.js-name').value;
-			const email=document.querySelector('.js-email').value;
+			// const email=document.querySelector('.js-email').value;
 			const password=document.querySelector('.js-pw').value;
 
 			POST('/auth/signup', {
 				name,
-				email,
+				// email,
 				password,
 			}).then((data) => {
 				console.log(data) 
