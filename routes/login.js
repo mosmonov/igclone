@@ -26,7 +26,7 @@ login.post('/', (req, res) => {
         // console.log(req.session)
         // if we are here, user has logged in!
         res.header('Content-Type', 'application/json');
-        res.redirect(`/`);
+        res.redirect(`/feed.html`);
     });
   })(req, res);
 });

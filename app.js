@@ -14,14 +14,14 @@ const DB_NAME = './data/db.sqlite'; // defines db filepath + filename
 //                  middleware
 //————————————————————————————————————————————————
 
-app.use('/', express.static('./public'));
+app.use(express.static('./public'));
 app.use(morgan('dev'));
 app.use(parser.json());
 app.use(session({ secret: 'lol bai',  resave: false, saveUninitialized : false }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-//      routes : all contained in .routes/
+//                    routes
 //————————————————————————————————————————————————
 
 const login = require('./routes/login'); // routes for login, exposed
@@ -30,46 +30,76 @@ app.use('/login', login);
 const signup = require('./routes/signup'); // routes for login, exposed
 app.use('/signup', signup);
 
-app.use((req, res, next) => { // route to protect all following routes from access unless user is
-  console.log(req.session)
-  console.log(req.isAuthenticated());
+// route protects all others below from access unless user is logged in
+app.use((req, res, next) => {
+  console.log('USER AUTHENTICATION STATUS : ' + req.isAuthenticated());
 
   if (req.isAuthenticated()) {
+    console.log('WELCOME, ' + req.session.passport.user.username)
+
+    console.log('******')
+    console.log(' USER : ' + req.session.passport.user.username)
+    console.log(' ID : ' + req.session.passport.user.id)
+    console.log('******')
     return next();
   }
-  return res.send('not loggedin')
+  // replace with some fancy visual to tell them not logged in.
+  return res.send('not logged in')
 });
 
 const api = require('./routes/api'); // going to create some sort of super-admin route to view all data, ya heard?
 app.use('/api', api);
 
+
 const profile = require('./routes/profile'); // route for viewing and editing own profile.
 app.use('/profile', profile);
+
 
 const post = require('./routes/posts'); // route to make a post
 app.use('/post', post);
 
+
+// MAIN PAGE FOR FEED
+app.get('/feed', (req,res) => {
+  db.all(`SELECT *
+          FROM Posts
+          INNER JOIN Follows on Follows.followed = Posts.user_id
+          INNER JOIN Users on Follows.user_id = Users.id`)
+    .then((posts) => {
+      const postData = JSON.parse(posts, null, 3)
+      console.log(postData)
+      console.log(typeof postData)
+
+      // data.posts = posts
+      // // data.currentUser = req.session.passport.user;
+      // console.log(JSON.parse(data));
+      res.header('Content-Type', 'application/json');
+      res.json(postData)
+    })
+    .catch(err => console.error(err.stack))
+})
+
+
+// LOGOUT
 app.use('/logout', (req , res) => {
   req.logout();
   res.redirect('/');
 });
 
 
-//                   routes
-//————————————————————————————————————————————————
 
-app.get('/info', (req,res) => {
-  // PASSPORT STORES USER SESSION INFO TO req.session? *** NEED TO FIGURE THIS OUT! - AC
-
-  console.log('----------------------------')
-  console.log(req.session)
-  console.log(req.user)
-  console.log('----------------------------')
-  res.setHeader('Content-Type', 'application/json');
-  res.send(req.user)
-  // DB — CREATE LOGIC TO PULL ALL POSTS FROM A LOGGED IN USER'S FOLLOWED USERS BASED ON ID NUMBER STORED IN SESSION OBJECT
-  // FE - RENDER POSTS WITH ASSOCIATED INFO
-})
+// app.get('/info', (req,res) => {
+//   // PASSPORT STORES USER SESSION INFO TO req.session? *** NEED TO FIGURE THIS OUT! - AC
+//
+//   console.log('----------------------------')
+//   console.log(req.session)
+//   console.log(req.user)
+//   console.log('----------------------------')
+//   res.setHeader('Content-Type', 'application/json');
+//   res.send(req.user)
+//   // DB — CREATE LOGIC TO PULL ALL POSTS FROM A LOGGED IN USER'S FOLLOWED USERS BASED ON ID NUMBER STORED IN SESSION OBJECT
+//   // FE - RENDER POSTS WITH ASSOCIATED INFO
+// })
 
 //              start db + start server
 //————————————————————————————————————————————————

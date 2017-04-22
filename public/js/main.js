@@ -5,7 +5,7 @@
 			const request = new XMLHttpRequest();
 			request.open('GET', url);
 			request.onload = () => {
-				const data = JSON.parse(request.responseText)
+				const data = JSON.stringify(request.responseText)
 				resolve(data)
 			};
 			request.onerror = (err) => {
@@ -41,7 +41,6 @@
 			e.preventDefault();
 
 			POST('/api/user/1/feed', {
-				?
 			}).then((data) => {
 					console.log(data);
 				});
@@ -62,11 +61,12 @@
 				// email,
 				password,
 			}).then((data) => {
-				console.log(data) 
+				console.log(data)
 				if (data.success) {
 					window.location.href="/login.html"
 				}
 			});
 		});
 	}
-})();
+
+// })();
