@@ -15,22 +15,18 @@ login.use(parser.json());
 
 login.post('/', (req, res) => {
   passport.authenticate('local', (err, user, info) => {
-    console.log('IN passport.authenticate')
+    console.log(`ATTEMPTING TO LOGIN USER '${user.username}'....`)
     console.log(err, user, info)
     if (err) console.log(err);
-    if (!user) console.log(user);
-
+    if (!user) console.log('USER NOT FOUND!');
+    // attempts to login user through passport's logIn method
     req.logIn(user, (err) => {
-    	console.log('LOGGED IN')
-        // if (err) return next(err);
-        console.log('SESSION')
-        console.log(req.session)
+        if (err) console.error(err.stack);
+        console.log(`USER '${user.username}' LOGGED IN!`);
+        // console.log(req.session)
         // if we are here, user has logged in!
         res.header('Content-Type', 'application/json');
-
-        res.send({
-            success: true,
-        });
+        res.redirect(`/`);
     });
   })(req, res);
 });

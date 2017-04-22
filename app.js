@@ -46,8 +46,8 @@ app.use('/api', api);
 const profile = require('./routes/profile'); // route for viewing and editing own profile.
 app.use('/profile', profile);
 
-const posts = require('./routes/posts'); // route CRUD functions for posts
-app.use('/posts', posts);
+const post = require('./routes/posts'); // route to make a post
+app.use('/post', post);
 
 app.use('/logout', (req , res) => {
   req.logout();
