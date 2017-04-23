@@ -5,7 +5,7 @@
 			const request = new XMLHttpRequest();
 			request.open('GET', url);
 			request.onload = () => {
-				const data = JSON.parse(request.responseText)
+				const data = JSON.stringify(request.responseText)
 				resolve(data)
 			};
 			request.onerror = (err) => {
@@ -41,7 +41,6 @@
 			e.preventDefault();
 
 			POST('/api/user/1/feed', {
-				// ?
 			}).then((data) => {
 					console.log(data);
 				});
@@ -49,7 +48,6 @@
 	}
 
 	const submitSignUpBtn = document.querySelector('.js-signup');
-	
 	if(submitSignUpBtn !== null) {
 		submitSignUpBtn.addEventListener('click', (e) => {
 			e.preventDefault();
@@ -57,7 +55,7 @@
 			const name=document.querySelector('.js-name').value;
 			// const email=document.querySelector('.js-email').value;
 			const password=document.querySelector('.js-pw').value;
-
+      
 			POST('/login/signup', {
 				name,
 				// email,
@@ -67,12 +65,10 @@
 				if (data) {
 					window.location.href="/signin.html"
 					//	window.location="/feed.html"
-
 				}
 			});
 		});
 	}
-
 	const submitSignInBtn = document.querySelector('.js-signin');
 	
 	if(submitSignInBtn !== null) {

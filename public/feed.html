@@ -10,6 +10,7 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
         <!-- Font -->
+
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,300,600' rel="stylesheet" type="text/css">
 
     <!-- CSS -->
@@ -27,76 +28,17 @@
         <span class="label label-primary admin"> <a href="admin.html"> Admin </a></span>
         <span class="label label-success profile"> <a href="profile.html">Profile </a></span>
         <span class="label label-info feed"> <a href="feed.html">Feed </a></span>
+
        <a href="./signin.html"><button type="button" class="btn label-danger navbar-btn navbar-right"> Sign in</button> </a>
 
       </div>  <!-- container-->
 </nav>
 <div class="container">
-    <div class="container">
-        <div class="row">
-            <div class="search">
-    <input type="text" class="form-control input-sm" maxlength="64" placeholder="Search" />
-     <button type="submit" class="btn btn-primary btn-sm">Search</button>
-    </div>
-        </div>
-    </div>
     <div class="col-md-3"></div>
-    <div class="col-md-6">
-            <div class="panel panel-default panelD">
-                <div class="panel-heading">
-                    <ul class="list-inline js-username">
-                        <li>Fred</li>
-                        <li class="pull-right" style="padding-right: 0;">1 week</li>
-                    </ul>
-                </div>
-                <div class="panel-image js-pic">
-                    <img src="http://666a658c624a3c03a6b2-25cda059d975d2f318c03e90bcf17c40.r92.cf1.rackcdn.com/unsplash_52d09387ae003_1.JPG" class="panel-image-preview" />
-                </div>
-                <div class="panel-body">
-                    <blockquote>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                    </blockquote>
-                    <span class="tagz">Tags: <a>#faking</a></span>
-                </div>
-                <div class="panel-footer">
-                    <ul class="list-inline clearfix">
-                        <li class="col-sm-4 col-md-4 col-lg-4 level-line-up"><a href=""><span class="fa fa-thumbs-o-up"></span> Like</a><span>10</span></li>
-                        <li class="col-sm-4 col-md-4 col-lg-4 level-line-up"><center><a href=""><span class="fa fa-comments"></span> </a><span>10</span></center></li>
-                        <li class="col-sm-4 col-md-4 col-lg-4" style="padding-right: 0;"><span class="pull-right">10</span><a class="pull-right" href=""><span class="fa fa-bomb"></span> Nutty</a></li>
-                    </ul>
-                </div> <!--panel footer-->
-            </div> <!-- panelD -->
-            <div class="panel panel-default panelD">
-                <div class="panel-heading">
-                    <ul class="list-inline">
-                        <li>Jimmy</li>
-                        <li class="pull-right" style="padding-right: 0;">1 week</li>
-                    </ul>
-                </div>
-                <div class="panel-image">
-                    <!--<img src="http://mars-2035432769.us-west-1.elb.amazonaws.com/arcgis/rest/services/Mars_Viking_MDIM21_ClrMosaic_global_232m_sp/MapServer/tile/1/0/2?blankTile=false" class="panel-image-preview" />-->
-                </div>
-                <div class="panel-body">
-                    <blockquote>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                    </blockquote>
-                    <span class="tagz">Tags: <a>#jimmy</a> <a>#tag_city</a></span>
-                </div>
-                <div class="panel-footer">
-                    <ul class="list-inline clearfix">
-                        <li class="col-sm-4 col-md-4 col-lg-4 level-line-up"><a href=""><span class="fa fa-thumbs-o-up"></span> Like</a><span>10</span></li>
-                        <li class="col-sm-4 col-md-4 col-lg-4 level-line-up"><center><a href=""><span class="fa fa-comments"></span> </a><span>10</span></center></li>
-                        <li class="col-sm-4 col-md-4 col-lg-4" style="padding-right: 0;"><span class="pull-right">10</span><a class="pull-right" href=""><span class="fa fa-bomb"></span> Nutty</a></li>
-                        <!--<li style="margin-right: -20px;"><a href=""><span class="fa fa-thumbs-o-up"></span> Like</a></li>
-                        <li style="margin-right: -20px;"><a href=""><span class="fa fa-comments"></span> Comment</a></li>
-                        <li><a href=""><span class="fa fa-bomb"></span> Nutty</a></li>
-                        <li class="pull-right" style="margin-right: -5px;"><span>Nuts 10</span></li>
-                        <li class="pull-right"><span>Likes 100</span></li>-->
-                    </ul> <!--clearfix-->
-                </div> <!--panel-footer-->
-            </div> <!--panel ID-->
-    </div> <!--col-md-6 -->
+    <div class="col-md-6 postsContainer"></div> <!--col-md-6 -->
     <div class="col-md-3"></div>
 </div> <!-- container -->
+<script src="js/main.js"></script>
+<script src="js/feed.js"></script>
 </body>
 </html>
