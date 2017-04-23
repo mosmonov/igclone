@@ -3,6 +3,10 @@ const posts = express.Router();
 const db = require('sqlite');
 const parser = require('body-parser');
 
+const AUTH = require('../middleware/auth.js')
+
+console.log(AUTH)
+
 // middleware
 posts.use(parser.urlencoded({
     extended: true
@@ -48,11 +52,14 @@ posts.post('/create', (req, res) => {
 // get posts of followed users
 posts.get('/:userid/feed', (req, res) => {
   // get list of users //
-  db.all(`SELECT followed * FROM follows WHERE user_id = ?`, v)
+  db.all(`SELECT followed, id FROM follows 
+     INNER JOIN Users ON followed = Users.id
+     INNER JOIN Posts ON followed = post.user_id
+     WHERE user.id = ${req.params.userid}`  ) //taking the params from the request and parsing it in. 
     .then(v => {
       console.log(v)
       // return res.send(v)
-      return db.get('SELECT post * FROM Posts WHERE name = id and post = posts ', [id.lastid])
+      // return db.get('SELECT post * FROM Posts WHERE name = id and post = posts ', [])
     })
     .catch(err => console.log(err.stack))
 });
