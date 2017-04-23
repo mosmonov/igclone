@@ -66,19 +66,13 @@ app.get('/feed', (req,res) => {
           INNER JOIN Follows on Follows.followed = Posts.user_id
           INNER JOIN Users on Follows.user_id = Users.id`)
     .then((posts) => {
-      const postData = JSON.parse(posts, null, 3)
-      console.log(postData)
-      console.log(typeof postData)
-
+      // let data = JSON.parse(posts);
       // data.posts = posts
       // // data.currentUser = req.session.passport.user;
-      // console.log(JSON.parse(data));
-      res.header('Content-Type', 'application/json');
-      res.json(postData)
+      res.json(posts)
     })
     .catch(err => console.error(err.stack))
 })
-
 
 // LOGOUT
 app.use('/logout', (req , res) => {
