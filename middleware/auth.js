@@ -9,9 +9,11 @@ passport.serializeUser((user, done) =>  {
   done(null, user);
 });
 
-passport.deserializeUser((id, done) => {
-  console.log('DESERIALIZED USER WITH ID: ' + id );
-  done(null, id);
+passport.deserializeUser((user, done) => {
+  console.log('about to deserializeUser')
+  console.log(user.id)
+  console.log('DESERIALIZED USER WITH ID: ' + user.id);
+  done(null, user.id);
 });
 
 //        passport auth strategy
