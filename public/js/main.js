@@ -1,4 +1,4 @@
-(function () {
+// (function () {
 
 	function GET(url) {
 		return new Promise((resolve, reject) => {
@@ -127,4 +127,3 @@ function render(users) {
 		}
 	}
 })();
-

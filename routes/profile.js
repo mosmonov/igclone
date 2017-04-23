@@ -9,9 +9,9 @@ profile.use(parser.urlencoded({
 profile.use(parser.json());
 
 // base url /profile
-profile.get('/:user', (req, res) => {
+profile.get('/:username', (req, res) => {
   // get list of users //
-  const username = req.params.user;
+  const username = req.params.username;
   db.get("SELECT * FROM Users WHERE email = ?" , username)
     .then(userInfo => {
       // console.log(v)
