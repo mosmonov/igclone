@@ -1,7 +1,7 @@
 {
   "name": "insta_clone",
   "version": "1.0.0",
-  "description": "",
+  "description": "## Contributors",
   "main": "app.js",
   "scripts": {
     "start": "supervisor app.js",
@@ -23,5 +23,13 @@
   "devDependencies": {
     "morgan": "^1.8.1",
     "supervisor": "^0.12.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mosmonov/igclone.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mosmonov/igclone/issues"
+  },
+  "homepage": "https://github.com/mosmonov/igclone#readme"
 }

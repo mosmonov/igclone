@@ -22,7 +22,7 @@
 			request.setRequestHeader('Content-Type', 'application/json');
 
 			request.onload = () => {
-				const data = JSON.parse(request.responseText);
+				const data = request.responseText;
 				resolve(data)
 			};
 			request.onerror = (err) => {
@@ -41,7 +41,7 @@
 			e.preventDefault();
 
 			POST('/api/user/1/feed', {
-				?
+				// ?
 			}).then((data) => {
 					console.log(data);
 				});
@@ -49,6 +49,7 @@
 	}
 
 	const submitSignUpBtn = document.querySelector('.js-signup');
+	
 	if(submitSignUpBtn !== null) {
 		submitSignUpBtn.addEventListener('click', (e) => {
 			e.preventDefault();
@@ -57,17 +58,73 @@
 			// const email=document.querySelector('.js-email').value;
 			const password=document.querySelector('.js-pw').value;
 
-			POST('/auth/signup', {
+			POST('/login/signup', {
 				name,
 				// email,
 				password,
 			}).then((data) => {
 				console.log(data) 
-				if (data.success) {
-					window.location.href="/login.html"
+				if (data) {
+					window.location.href="/signin.html"
+					//	window.location="/feed.html"
+
 				}
 			});
 		});
+	}
+
+	const submitSignInBtn = document.querySelector('.js-signin');
+	
+	if(submitSignInBtn !== null) {
+		submitSignInBtn.addEventListener('click', (e) => {
+			e.preventDefault();
+
+			const name=document.querySelector('.js-name').value;
+
+			// const email=document.querySelector('.js-email').value;
+			const password=document.querySelector('.js-pw').value;
+
+			if (!name || !password) {
+				alert('need name and password');
+				return;
+			}
+			console.log(name, password)
+
+			POST('/login', {
+				name,
+				// email,
+				password,
+			}).then((data) => {
+				console.log(data) 
+				if (data) {
+					window.location.href="/feed.html"
+					//	window.location="/feed.html"
+
+				}
+			});
+		});
+	}
+
+function render(users) {
+		console.log()
+		const container = document.querySelector('.js-users');
+		container.innerHTML = '';
+	for (const user of users) {
+			const li = document.createElement("li");
+			li.innerHTML = `
+				<span class="js-username">${user.username}</span>
+				<div class="js-pic">${user.picture}</div>
+			`;
+			container.appendChild(li);
+
+		if (users.length === 0) {
+			container.innerHTML = `
+			<li class="js-username">
+			No Users!
+			</li>
+			`;
+			}
+		}
 	}
 })();
 

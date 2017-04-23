@@ -27,16 +27,16 @@ app.use(passport.session());
 //————————————————————————————————————————————————
 
 const api = require('./routes/api'); // going to create some sort of super-admin route to view all data, ya heard?
-app.use('/api', passport.authenticate('local'), api);
+app.use('/api', api);
 
 const login = require('./routes/login'); // routes for login and signup.
 app.use('/login', login);
 
 const profile = require('./routes/profile'); // route for viewing and editing own profile.
-app.use('/profile', passport.authenticate('local'), profile);
+app.use('/profile', profile);
 
 const posts = require('./routes/posts'); // route CRUD functions for posts
-app.use('/posts', passport.authenticate('local'), posts);
+app.use('/posts', posts);
 
 
 //                   routes
