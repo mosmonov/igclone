@@ -57,7 +57,7 @@ posts.get('/:userid/feed', (req, res) => {
      INNER JOIN Posts ON followed = post.user_id
      WHERE user.id = ${req.params.userid}`  ) //taking the params from the request and parsing it in. 
     .then(v => {
-      console.log(v)
+      console.log()
       // return res.send(v)
       // return db.get('SELECT post * FROM Posts WHERE name = id and post = posts ', [])
     })

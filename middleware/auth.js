@@ -2,42 +2,31 @@ const db = require('sqlite');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
-
-
-
-//          user serialization
+//      pasport user serialization
 // ———————————————————————————————————
 passport.serializeUser((user, done) =>  {
-  // console.log('SERIALIZED USER');
-  // console.log("here",user)
+  console.log('SERIALIZED USER WITH ID: ' + user.id );
   done(null, user);
 });
 
-passport.deserializeUser((id, done) => {
-  db.get(`SELECT id FROM Users WHERE id IS '${id}'`)
-    .then((err, row) => {
-      if (!row) return done(null, false);
-      console.log('DERIALIZED USER');
-      return done(null, row)
-    })
-    .catch(err => console.error(err.stack))
+passport.deserializeUser((user, done) => {
+  console.log('about to deserializeUser')
+  console.log(user.id)
+  console.log('DESERIALIZED USER WITH ID: ' + user.id);
+  done(null, user.id);
 });
 
-//               user auth
+//        passport auth strategy
 // ———————————————————————————————————
 passport.use(new LocalStrategy(
   (username, password, done) => {
-    console.log('IN AUTH STRATEGY')
-    console.log('USERNAME :' + username)
-    db.get(`SELECT id, email, password FROM Users WHERE email IS '${username}' AND password = '${password}'`)
+    db.get(`SELECT id, username FROM Users WHERE username IS '${username}' AND password = '${password}'`)
       .then((row) => {
         if (!row) return done(null, false);
-        console.log('LOGIN SUCCESS!!!');
         return done(null, row);
       })
       .catch(err => console.error(err.stack))
   }
 ));
-
 
 module.exports = passport;
