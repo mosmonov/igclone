@@ -59,21 +59,6 @@ const post = require('./routes/posts'); // route to make a post
 app.use('/post', post);
 
 
-// MAIN PAGE FOR FEED
-app.get('/:userid/feed', (req,res) => {
-  db.all(`SELECT followed, id FROM follows 
-          INNER JOIN Users ON followed = Users.id
-          INNER JOIN Posts ON followed = post.user_id
-          WHERE user.id = ${req.params.userid}`)
-    .then((posts) => {
-      // let data = JSON.parse(posts);
-      // data.posts = posts
-      // // data.currentUser = req.session.passport.user;
-      res.json(posts)
-    })
-    .catch(err => console.error(err.stack))
-})
-
 // LOGOUT
 app.use('/logout', (req , res) => {
   req.logout();

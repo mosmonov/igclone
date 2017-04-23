@@ -51,6 +51,7 @@ posts.post('/create', (req, res) => {
 
 // get posts of followed users
 posts.get('/:userid/feed', (req, res) => {
+  console.log(req.params.userid)
   // get list of users //
   db.all(`SELECT Follows.user_id as fuser_id,
       Follows.followed as fid,
@@ -58,13 +59,14 @@ posts.get('/:userid/feed', (req, res) => {
       Posts.url as purl,
       Posts.description as pdesc
       FROM Follows 
-     INNER JOIN Users ON Follows.user_id = Users.id
-     INNER JOIN Posts ON Follows.followed = Posts.user_id
-      WHERE user.id = ${req.params.userid}`) //taking the params from the request and parsing it in. 
+      INNER JOIN Users ON Follows.user_id = Users.id
+      INNER JOIN Posts ON Follows.followed = Posts.user_id
+      WHERE Users.id = ${req.params.userid}`) //taking the params from the request and parsing it in. 
     .then(v => {
       console.log()
-      // return res.send(v)
+      return res.send(v)
       // return db.get('SELECT post * FROM Posts WHERE name = id and post = posts ', [])
+      // response.
     })
     .catch(err => console.log(err.stack))
 });
