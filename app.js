@@ -59,6 +59,29 @@ const post = require('./routes/posts'); // route to make a post
 app.use('/post', post);
 
 
+// MAIN PAGE FOR FEED
+app.get('/:userid/feed', (req,res) => {
+  db.all(`SELECT followed, id FROM follows 
+          INNER JOIN Users ON followed = Users.id
+          INNER JOIN Posts ON followed = post.user_id
+          WHERE user.id = ${req.params.userid}`)
+    .then((posts) => {
+      // let data = JSON.parse(posts);
+      // data.posts = posts
+      // // data.currentUser = req.session.passport.user;
+      res.json(posts)
+    })
+    .catch(err => console.error(err.stack))
+})
+
+// LOGOUT
+app.use('/logout', (req , res) => {
+  req.logout();
+  res.redirect('/');
+});
+
+
+
 // app.get('/info', (req,res) => {
 //   // PASSPORT STORES USER SESSION INFO TO req.session? *** NEED TO FIGURE THIS OUT! - AC
 //
@@ -75,6 +98,7 @@ app.use('/post', post);
 //              start db + start server
 //————————————————————————————————————————————————
 
+
 // V IMPORTANT STUFF
 // Sqlite statements return promises so to start things off we inialize the db session and if needed, clear previous data
 Promise.resolve()
@@ -87,3 +111,4 @@ Promise.resolve()
   .then(()=> { console.log('------------------------------------------------------') })
   .then(()=> { console.log('\n') })
   .catch(err => console.error(err.stack))
+

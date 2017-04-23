@@ -23,7 +23,8 @@ signup.post('/', (req, res) => {
   const password = req.body.password;
   const password2 = req.body.password2;
 
-  // FE — Simple password match check
+
+  // FE — Simple password match check
   if (password !== password2 ) {
     // FE — some front end  logic to signify passwords don't match
     res.redirect('/')
@@ -56,4 +57,5 @@ signup.post('/', (req, res) => {
 });
 
 // exports route
+
 module.exports = signup;
