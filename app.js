@@ -44,8 +44,7 @@ app.use((req, res, next) => { // route to protect all following routes from acce
   return res.send('not loggedin')
 });
 
-const api = require('./routes/api'); // going to create some sort of super-admin route to view all data, ya heard?
-app.use('/api', api);
+
 
 const profile = require('./routes/profile'); // route for viewing and editing own profile.
 app.use('/profile', profile);
