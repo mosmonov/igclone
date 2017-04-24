@@ -54,8 +54,13 @@
 	}
 
 	const submitSignUpBtn = document.querySelector('.js-signup');
-	
+	const input = document.querySelector('.js-pw');
+	input.addEventListener('keydown', (e) => {
+		if (e.keyCode === 13) {
+			validateSearch();
+	}
 	if(submitSignUpBtn !== null) {
+
 		submitSignUpBtn.addEventListener('click', (e) => {
 			e.preventDefault();
 
@@ -77,6 +82,14 @@
 			});
 		});
 	}
+
+	function validateSearch() {
+		const searchTerm = input.value;
+
+		if (searchTerm.trim() === "") {
+			alert('Please input a value!')
+			return;
+		}
 
 	const submitSignInBtn = document.querySelector('.js-signin');
 	
