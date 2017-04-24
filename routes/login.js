@@ -14,8 +14,14 @@ login.use(parser.json());
 // ———————————————————————————————————
 
 login.post('/', (req, res) => {
+    console.log(req.body)
   passport.authenticate('local', (err, user, info) => {
     console.log(`ATTEMPTING TO LOGIN USER '${user.username}'....`)
+    if (!user) {
+        res.status(403);
+        res.send({success: false})
+        return;
+    }
     console.log(err, user, info)
     if (err) console.log(err);
     if (!user) console.log('USER NOT FOUND!');
@@ -26,7 +32,7 @@ login.post('/', (req, res) => {
         // console.log(req.session)
         // if we are here, user has logged in!
         res.header('Content-Type', 'application/json');
-        res.redirect(`/`);
+        res.send({user});
     });
   })(req, res);
 });

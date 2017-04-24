@@ -32,19 +32,24 @@
 		});
 	} // POST
 
-	const submitFollowBtn = document.querySelector('.js-submit');
+	const submitFollowBtn = document.querySelector('.js-follow');
 	if (submitFollowBtn !== null) {
-		GET('/api/user/1/feed').then((data) => {
+		GET('/api/1/feed').then((data) => {
 			console.log(data);
 		});
 		submitFollowBtn.addEventListener('click', (e) => {
 			e.preventDefault();
+		const name=document.querySelector('.js-name').value;
+			// const email=document.querySelector('.js-email').value;
+		const password=document.querySelector('.js-pw').value;
 
-			POST('/api/user/1/feed', {
-				// ?
-			}).then((data) => {
+			POST('/api/1/feed', {
+				username: name,
+				password
+
+				}).then((data) => {
 					console.log(data);
-				});
+			});
 		});
 	}
 
@@ -91,11 +96,23 @@
 			console.log(name, password)
 
 			POST('/login', {
-				name,
+				username: name,
 				// email,
 				password,
 			}).then((data) => {
-				console.log(data) 
+				console.log(data);
+				try {
+					data = JSON.parse(data)
+				}
+				catch(e) {
+					throw new Error(e);
+				}
+
+				console.log(data)
+				if (data && data.success === false) {
+					alert('Not a real user');
+					return;
+				}
 				if (data) {
 					window.location.href="/feed.html"
 					//	window.location="/feed.html"
@@ -105,25 +122,58 @@
 		});
 	}
 
-function render(users) {
-		console.log()
-		const container = document.querySelector('.js-users');
+function render(posts) {
+	return new Promise((resolve, reject) => {
+		const container = document.querySelector('.js-add-post');
 		container.innerHTML = '';
-	for (const user of users) {
+		for (const post of posts) {
 			const li = document.createElement("li");
 			li.innerHTML = `
-				<span class="js-username">${user.username}</span>
-				<div class="js-pic">${user.picture}</div>
-			`;
+<div>
+	<ul class="list-inline"> 
+		<li class="js-name"${posts.uname}></li>
+	</ul>
+</div>
+<div class="panel-image js-pic">${posts.purl}
+</div>
+<div class="panel-body">
+	<blockquote>
+	<p class="js-text"${posts.pdesc}"> </p>
+	</blockquote>
+</div>
+	`;
 			container.appendChild(li);
 
-		if (users.length === 0) {
-			container.innerHTML = `
-			<li class="js-username">
-			No Users!
-			</li>
-			`;
+			if (posts.length === 0) {
+				container.innerHTML = `
+<li class="js-name">
+	No Users!
+</li>
+				`;
 			}
-		}
-	}
+		} //for loop
+	}) // promise
+} //render
+
+  GET('/post')
+		.then((posts) => {
+			console.log(posts)
+			render(posts);
+		});
+
+  document.querySelector('.js-add-post').addEventListener('click', (e) => {
+		const input = document.querySelector('.js-post-text');
+		input.setAttribute('disabled', 'disabled');
+
+		POST('/create', {
+			post: input.value,
+			when: new Date().getTime() + 9 * 60 * 60 * 1000
+		}).then((data) => {
+			input.removeAttribute('disabled');
+			input.value = '';
+			render(data);
+		});
+
+	});
+
 })();

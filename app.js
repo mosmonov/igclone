@@ -81,7 +81,7 @@ app.get('/info', (req,res) => {
 // Sqlite statements return promises so to start things off we inialize the db session and if needed, clear previous data
 Promise.resolve()
   .then(() => db.open(DB_NAME, { Promise })) // starts DB Session
-  // .then(() => db.migrate({ force : 'last' })) // uncomment and restart server once to reset db
+  .then(() => db.migrate({ force : 'last' })) // uncomment and restart server once to reset db
   .then(app.listen(port)) // start server
   .then(()=> { console.log('------------------------------------------------------') })
   .then(()=> { console.log("Instagram Clone Project Running on "  + port + ".") })

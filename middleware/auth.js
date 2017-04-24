@@ -18,8 +18,12 @@ passport.deserializeUser((id, done) => {
 // ———————————————————————————————————
 passport.use(new LocalStrategy(
   (username, password, done) => {
-    db.get(`SELECT id, username FROM Users WHERE username IS '${username}' AND password = '${password}'`)
+    console.log('----------------')
+    console.log(username, password)
+    console.log('----------------')
+    db.get(`SELECT id, username FROM users WHERE username = '${username}' AND password = '${password}';`)
       .then((row) => {
+        console.log(row, '------------')
         if (!row) return done(null, false);
         return done(null, row);
       })
