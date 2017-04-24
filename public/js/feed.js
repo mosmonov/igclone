@@ -35,4 +35,5 @@ GET('/feed')
       postContainer.appendChild(div);
       })
   })
+
   .catch(err => console.log(err.stack))
