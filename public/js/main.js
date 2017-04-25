@@ -5,7 +5,7 @@
 			const request = new XMLHttpRequest();
 			request.open('GET', url);
 			request.onload = () => {
-				const data = JSON.parse(request.responseText)
+				const data = JSON.stringify(request.responseText)
 				resolve(data)
 			};
 			request.onerror = (err) => {
@@ -34,7 +34,7 @@
 
 	const submitFollowBtn = document.querySelector('.js-follow');
 	if (submitFollowBtn !== null) {
-		GET('/api/1/feed').then((data) => {
+		GET('/api/user/1/feed').then((data) => {
 			console.log(data);
 		});
 		submitFollowBtn.addEventListener('click', (e) => {
@@ -43,14 +43,18 @@
 			// const email=document.querySelector('.js-email').value;
 		const password=document.querySelector('.js-pw').value;
 
-			POST('/api/1/feed', {
+			POST('/api/user/1/feed', {
 				username: name,
 				password
 
 				}).then((data) => {
+
+			POST('/api/user/1/feed', {
+			}).then((data) => {
 					console.log(data);
 			});
 		});
+	  }
 	} //SubmitFollowBtn
 	// function validateSearch() {
 	// 	const searchTerm = input.value;
@@ -72,6 +76,7 @@
 			console.log(name, password)		
 		}
 	});
+
 	if(submitSignUpBtn !== null) {
 
 		submitSignUpBtn.addEventListener('click', (e) => {
@@ -90,13 +95,13 @@
 				if (data) {
 					window.location.href="/signin.html"
 					//	window.location="/feed.html"
-
 				}
 			});
 		}); // click
 	}
 
 	
+
 	const submitSignInBtn = document.querySelector('.js-signin');
 	
 	if(submitSignInBtn !== null) {

@@ -5,10 +5,10 @@ const db = require('sqlite');
 
 // base url /api
 api.get('/users',(req, res) => {
-  // get list of users //
+
   db.all('SELECT * FROM Users')
     .then(v => {
-      // console.log(v)
+      console.log('here')
       return res.send(v)
     })
     .catch(err => console.log(err.stack))
