@@ -22,7 +22,7 @@
 			request.setRequestHeader('Content-Type', 'application/json');
 
 			request.onload = () => {
-				const data = request.responseText;
+				const data = request.responseText
 				resolve(data)
 			};
 			request.onerror = (err) => {
@@ -51,14 +51,27 @@
 					console.log(data);
 			});
 		});
-	}
+	} //SubmitFollowBtn
+	// function validateSearch() {
+	// 	const searchTerm = input.value;
+
+	// 	if (searchTerm.trim() === "") {
+	// 		alert('Please input a value!')
+	// 		return;
+	// 	}
+	// } // VaildateSearch
 
 	const submitSignUpBtn = document.querySelector('.js-signup');
-	const input = document.querySelector('.js-pw');
+	const input = document.querySelector('.js-pw').value;
 	input.addEventListener('keydown', (e) => {
 		if (e.keyCode === 13) {
-			validateSearch();
-	}
+			if (!name || !password) {
+				alert('need name and password');
+				return;
+			}
+			console.log(name, password)		
+		}
+	});
 	if(submitSignUpBtn !== null) {
 
 		submitSignUpBtn.addEventListener('click', (e) => {
@@ -68,8 +81,8 @@
 			// const email=document.querySelector('.js-email').value;
 			const password=document.querySelector('.js-pw').value;
 
-			POST('/login/signup', {
-				name,
+			POST('/signup/login', {
+				username: name,
 				// email,
 				password,
 			}).then((data) => {
@@ -80,17 +93,10 @@
 
 				}
 			});
-		});
+		}); // click
 	}
 
-	function validateSearch() {
-		const searchTerm = input.value;
-
-		if (searchTerm.trim() === "") {
-			alert('Please input a value!')
-			return;
-		}
-
+	
 	const submitSignInBtn = document.querySelector('.js-signin');
 	
 	if(submitSignInBtn !== null) {
@@ -113,7 +119,7 @@
 				// email,
 				password,
 			}).then((data) => {
-				console.log(data);
+				
 				try {
 					data = JSON.parse(data)
 				}
@@ -126,21 +132,31 @@
 					alert('Not a real user');
 					return;
 				}
+				console.log('POST /login data', data);
+				localStorage.setItem('user_id', data.id)
 				if (data) {
 					window.location.href="/feed.html"
 					//	window.location="/feed.html"
 
-				}
-			});
+				} // data
+			}); // .then
 		});
-	}
+	} // Submit Sign in Button
 
 function render(posts) {
 	return new Promise((resolve, reject) => {
+		const posts = data['user']
 		const container = document.querySelector('.js-add-post');
 		container.innerHTML = '';
-		for (const post of posts) {
+		console.log('postItems :', user);
+		for (const postItem of posts) {
+				console.log('single :',postItem);
+				console.log('each user id :',postItem["id"]);
+				const id = postItem["id"];
 			const li = document.createElement("li");
+			const url = postItem.url;
+			const description = postItem.desc;
+			const name = postItem.name;
 			li.innerHTML = `
 <div>
 	<ul class="list-inline"> 
@@ -167,11 +183,11 @@ function render(posts) {
 		} //for loop
 	}) // promise
 } //render
-
-  GET('/post')
-		.then((posts) => {
-			console.log(posts)
-			render(posts);
+  const userId = localStorage.getItem('user_id')
+  GET('/api/user' + userId)
+		.then((data) => {
+			console.log(data)
+			render(data);
 		});
 
   document.querySelector('.js-add-post').addEventListener('click', (e) => {
@@ -188,5 +204,4 @@ function render(posts) {
 		});
 
 	});
-
 })();
