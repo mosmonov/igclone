@@ -5,14 +5,14 @@ const LocalStrategy = require('passport-local').Strategy;
 //      pasport user serialization
 // ———————————————————————————————————
 passport.serializeUser((user, done) =>  {
-  console.log('SERIALIZED USER WITH ID: ' + user.id );
+  // console.log('SERIALIZED USER WITH ID: ' + user.id );
   done(null, user);
 });
 
 passport.deserializeUser((user, done) => {
-  console.log('about to deserializeUser')
-  console.log(user.id)
-  console.log('DESERIALIZED USER WITH ID: ' + user.id);
+  // console.log('about to deserializeUser')
+  // console.log(user.id)
+  // console.log('DESERIALIZED USER WITH ID: ' + user.id);
   done(null, user.id);
 });
 

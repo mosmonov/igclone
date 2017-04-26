@@ -34,54 +34,29 @@ app.use('/login', login);
 const signup = require('./routes/signup'); // routes for login, exposed
 app.use('/signup', signup);
 
+app.use('/logout', (req , res) => {
+  req.logout();
+  res.redirect('/');
+});
 // route protects all others below from access unless user is logged in
 app.use((req, res, next) => {
-  console.log('USER AUTHENTICATION STATUS : ' + req.isAuthenticated());
-
   if (req.isAuthenticated()) {
     console.log('WELCOME, ' + req.session.passport.user.username)
-
-    console.log('******')
-    console.log(' USER : ' + req.session.passport.user.username)
-    console.log(' ID : ' + req.session.passport.user.id)
-    console.log('******')
     return next();
   }
   // replace with some fancy visual to tell them not logged in.
-  return res.send('not logged in')
+  res.send('401 Unauthorized')
 });
 
 
+const viewer = require('./routes/viewer'); // going to create some sort of super-admin route to view all data, ya heard?
+app.use('/viewer', viewer);
 
 
 const profile = require('./routes/profile'); // route for viewing and editing own profile.
 app.use('/profile', profile);
 
 
-const post = require('./routes/posts'); // route to make a post
-app.use('/post', post);
-
-
-// MAIN PAGE FOR FEED
-app.get('/feed', (req,res) => {
-  db.all(`SELECT *
-          FROM Posts
-          INNER JOIN Follows on Follows.followed = Posts.user_id
-          INNER JOIN Users on Follows.user_id = Users.id`)
-    .then((posts) => {
-      // let data = JSON.parse(posts);
-      // data.posts = posts
-      // // data.currentUser = req.session.passport.user;
-      res.json(posts)
-    })
-    .catch(err => console.error(err.stack))
-})
-
-// LOGOUT
-app.use('/logout', (req , res) => {
-  req.logout();
-  res.redirect('/');
-});
 
 
 
@@ -100,6 +75,7 @@ app.use('/logout', (req , res) => {
 
 //              start db + start server
 //————————————————————————————————————————————————
+
 
 // V IMPORTANT STUFF
 // Sqlite statements return promises so to start things off we inialize the db session and if needed, clear previous data
