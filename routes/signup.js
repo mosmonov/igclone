@@ -14,10 +14,6 @@ signup.use(parser.json());
 // ———————————————————————————————————
 
 signup.post('/', (req, res) => {
-  // future improvements :
-    // DB — check to see if username exisits
-    // FE/BE — force passwords to match
-
   // Pulls values from post request
   const username = req.body.username;
   const password = req.body.password;
@@ -34,11 +30,10 @@ signup.post('/', (req, res) => {
     .then((v) => {
       // CHECK TO SEE IF USER ALREADY EXISTS
       if (v.length > 0){
-        // FE - Replace with response to thorw error that a user already exists with this name
+        // FE - Replace with FE response to tell user another user already exists with same name
         console.log('USER EXISTS')
-        // BAIL AND SEND USER BACK TO HOMEPAGE
+        // BAIL AND SEND USER BACK TO HOMEPAGE, CHANGE TO FE RESPONSE
         res.redirect('/')
-        // RETURN TO ESCAPE FUNCTION
         return;
       } else {
         // GET USERS FROM DB

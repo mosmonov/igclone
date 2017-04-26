@@ -4,7 +4,7 @@
 	font-family: sans-serif;
 }
 a {
-	color: white;
+	color: black;
 }
 a:hover {
 	text-decoration: none;
@@ -57,7 +57,7 @@ color: #999;
 
 .container {
     background-color: #FAFAFA !important;
-    margin-top: 5%;   
+    margin-top: 5%;
 }
 .cnt{
 	margin-top: 20%;
@@ -89,12 +89,12 @@ color: #999;
 }
 
 .panel-body blockquote {
-    margin: 10px 0 10px;    
+    margin: 10px 0 10px;
 }
 
 .tagz {
     margin: 15px 0px 0px;
-    display: block;    
+    display: block;
 }
 
 .tagz a {
@@ -108,7 +108,7 @@ color: #999;
 }
 
 .panel-image ~ .panel-footer span {
-    color: rgb(100, 100, 100);    
+    color: rgb(100, 100, 100);
 }
 
 .panel-footer .list-inline {
@@ -122,7 +122,7 @@ color: #999;
 
 /*==========  Mobile First Method  ==========*/
 
-/* Custom, iPhone Retina */ 
+/* Custom, iPhone Retina */
 @media only screen and (max-width : 320px) {
     .level-line-up {
         position: relative;
@@ -130,7 +130,7 @@ color: #999;
     }
 }
 
-/* Extra Small Devices, Phones */ 
+/* Extra Small Devices, Phones */
 @media only screen and (max-width : 480px) {
     .level-line-up {
         position: relative;

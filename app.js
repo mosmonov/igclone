@@ -30,40 +30,31 @@ app.use('/login', login);
 const signup = require('./routes/signup'); // routes for login, exposed
 app.use('/signup', signup);
 
+app.use('/logout', (req , res) => {
+  req.logout();
+  res.redirect('/');
+});
 // route protects all others below from access unless user is logged in
 app.use((req, res, next) => {
-  console.log('USER AUTHENTICATION STATUS : ' + req.isAuthenticated());
-
   if (req.isAuthenticated()) {
     console.log('WELCOME, ' + req.session.passport.user.username)
-
-    console.log('******')
-    console.log(' USER : ' + req.session.passport.user.username)
-    console.log(' ID : ' + req.session.passport.user.id)
-    console.log('******')
     return next();
   }
   // replace with some fancy visual to tell them not logged in.
-  return res.send('not logged in')
+  res.send('401 Unauthorized')
 });
 
-const api = require('./routes/api'); // going to create some sort of super-admin route to view all data, ya heard?
-app.use('/api', api);
+const viewer = require('./routes/viewer'); // going to create some sort of super-admin route to view all data, ya heard?
+app.use('/viewer', viewer);
 
 
 const profile = require('./routes/profile'); // route for viewing and editing own profile.
 app.use('/profile', profile);
 
 
-const post = require('./routes/posts'); // route to make a post
-app.use('/post', post);
+const api = require('./routes/api'); // route for CRUD operations to backend
+app.use('/api', api);
 
-
-// LOGOUT
-app.use('/logout', (req , res) => {
-  req.logout();
-  res.redirect('/');
-});
 
 
 
@@ -96,4 +87,3 @@ Promise.resolve()
   .then(()=> { console.log('------------------------------------------------------') })
   .then(()=> { console.log('\n') })
   .catch(err => console.error(err.stack))
-
