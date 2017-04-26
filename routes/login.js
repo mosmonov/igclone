@@ -32,11 +32,8 @@ login.post('/', (req, res) => {
         // console.log(req.session)
         // if we are here, user has logged in!
         res.header('Content-Type', 'application/json');
-<<<<<<< HEAD
         res.send({user});
-=======
         res.redirect(`/feed.html`);
->>>>>>> 5c2b3f337ef4c49c9e08ef0a888331f8448d26ec
     });
   })(req, res);
 });

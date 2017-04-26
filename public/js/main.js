@@ -47,15 +47,17 @@
 				username: name,
 				password
 
-				}).then((data) => {
+				})
+			.then((data) => {
 
-			POST('/api/user/1/feed', {
-			}).then((data) => {
-					console.log(data);
+				POST('/api/user/1/feed', {
+				}).then((data) => {
+						console.log(data);
+					});
 			});
 		});
 	  }
-	} //SubmitFollowBtn
+	 //SubmitFollowBtn
 	// function validateSearch() {
 	// 	const searchTerm = input.value;
 
@@ -66,7 +68,7 @@
 	// } // VaildateSearch
 
 	const submitSignUpBtn = document.querySelector('.js-signup');
-	const input = document.querySelector('.js-pw').value;
+	const input = document.querySelector('.js-pw');
 	input.addEventListener('keydown', (e) => {
 		if (e.keyCode === 13) {
 			if (!name || !password) {
@@ -150,7 +152,8 @@
 
 function render(posts) {
 	return new Promise((resolve, reject) => {
-		const posts = data['user']
+		console.log(posts);
+
 		const container = document.querySelector('.js-add-post');
 		container.innerHTML = '';
 		console.log('postItems :', user);
@@ -195,18 +198,29 @@ function render(posts) {
 			render(data);
 		});
 
-  document.querySelector('.js-add-post').addEventListener('click', (e) => {
-		const input = document.querySelector('.js-post-text');
-		input.setAttribute('disabled', 'disabled');
+const templateNAme = document.querySelector('body').getAttribute('data-template-name');
 
-		POST('/create', {
-			post: input.value,
-			when: new Date().getTime() + 9 * 60 * 60 * 1000
-		}).then((data) => {
-			input.removeAttribute('disabled');
-			input.value = '';
-			render(data);
+if(templateNAme === 'admin'){
+	const addPost = document.querySelector('.js-add-post');
+	console.log(addPost)
+	  addPost.addEventListener('click', (e) => {
+			const input = document.querySelector('.js-post-text');
+			input.setAttribute('disabled', 'disabled');
+
+			POST('/post/create', {
+				post: input.value,
+				when: new Date().getTime() + 9 * 60 * 60 * 1000
+			}).then((data) => {
+				input.removeAttribute('disabled');
+				input.value = '';
+				render(data);
+			});
+
 		});
+}
+else if(templateNAme === 'index'){
 
-	});
+
+}
+
 })();
