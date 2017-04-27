@@ -42,7 +42,8 @@ app.use('/logout', (req , res) => {
 app.use((req, res, next) => {
   if (req.isAuthenticated()) {
     console.log('WELCOME, ' + req.session.passport.user.username)
-    return next();
+    // return next();
+        return res.send({success: true});
   }
   // replace with some fancy visual to tell them not logged in.
   res.send('401 Unauthorized')

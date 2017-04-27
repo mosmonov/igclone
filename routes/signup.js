@@ -19,12 +19,9 @@ signup.post('/', (req, res) => {
   const password = req.body.password;
   const password2 = req.body.password2;
 
+console.log(username, password)
 
   // FE — Simple password match check
-  if (password !== password2 ) {
-    // FE — some front end  logic to signify passwords don't match
-    res.redirect('/')
-  } else {
   // FIND ALL USERS W USERNAME = FORM DATA USERNAME
   db.all("SELECT * FROM Users WHERE username = ?", username)
     .then((v) => {
@@ -33,8 +30,8 @@ signup.post('/', (req, res) => {
         // FE - Replace with FE response to tell user another user already exists with same name
         console.log('USER EXISTS')
         // BAIL AND SEND USER BACK TO HOMEPAGE, CHANGE TO FE RESPONSE
-        res.redirect('/')
-        return;
+        // res.redirect('/')
+        return res.send({success: false});
       } else {
         // GET USERS FROM DB
         db.get("SELECT * FROM Users")
@@ -48,7 +45,6 @@ signup.post('/', (req, res) => {
         }
     })
     .catch(err => console.log(err.stack))
-  }
 });
 
 // exports route
