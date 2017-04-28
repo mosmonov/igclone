@@ -15,6 +15,7 @@ GET('/api/feed')
     // }
 
     // // CONSTRUCT NAV BAR
+
     // move into main and call from each page...
     const navContainer = document.querySelector('.navbar')
     const div = document.createElement('div')
