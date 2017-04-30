@@ -1,26 +1,63 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <meta charset='utf-8'>
-      <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-      <title> Sign Up</title>
-      <link rel='stylesheet' href='styles/admin.css'>
-      <!-- Latest compiled and minified CSS -->
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-      <!-- Optional theme -->
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-      <!-- Font -->
-      <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel="stylesheet" type="text/css">
-      <!-- CSS -->
-      <link rel="stylesheet" href="styles/normalize.css">
-      <link rel="stylesheet" href="styles/skeleton.css">
-      <link rel="stylesheet" href='styles/main.css'>
-   </head>
-   <body clas="welcome">
-    	<div class="loginContainer"></div>
-			<div class="signupContainer"></div>
-      <!-- container -->
-      <script src="js/main.js"></script>
-      <script src="js/home.js"></script>
-   </body>
+<head>
+     <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title> Admin </title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <!-- Font -->
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,300,600' rel="stylesheet" type="text/css">
+
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles/normalize.css">
+    <link rel="stylesheet" href="styles/skeleton.css">
+
+
+    <link rel="stylesheet" href='styles/main.css'>
+</head>
+
+<body class="admin" data-template-name="post">
+   <div class="container-fluid">
+          <span class="label label-primary feed"> <a href="/feed.html"> Feed </a> </span>
+          <span class="label label-success profile"><a href="/profile.html"> Profile </a> </span>
+          <span class="label label-info post"> <a href="/post.html"> Post </a> </span>
+          
+          <span class="label label-danger right logout"><a href="/logout"> Logout </a></span>
+        </div>
+
+<div class="container">
+       <!--  <div class="col-md-4 posts">
+                <img src="http://lorempixel.com/600/600/nature/3/" class="img-thumbnail js-pic">
+                    <div class="panel-body">
+                        <blockquote>
+                          <input class="js-post-text" placeholder="Add desctiption">
+                        </blockquote>
+                    </div>
+                  <div>
+                  <button class="btn label-warning navbar-btn navbar-left js-pic-upload"> Upload Picture </button>
+                  <button class="btn label-success navbar-btn navbar-right js-add-post"> Post </button>
+                  </div>
+        </div> -->
+   
+
+     <div class="row img-thumbnails">
+     
+      
+    </div>
+</div> <!--container-->
+
+    <div class="col-md-3"></div>
+    <div class="col-md-4 picContainer"></div> <!--col-md-6 -->
+    <div class="col-md-3"></div>
+</div> <!-- container -->
+<script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
+<script src="js/main.js"></script>
+<script src="js/create.js"></script>
+<script src="js/app-firebase.js"></script>
+</body>
 </html>
