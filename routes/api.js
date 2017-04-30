@@ -14,7 +14,7 @@ api.use(parser.json());
 api.post('/create', (req, res) => {
   // get list of users //
   // console.log('here')
-  const user = req.body.userid;
+  const user = req.body.id;
   const image = req.body.image;
   const words = req.body.summary;
 

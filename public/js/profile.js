@@ -11,11 +11,11 @@ GET('/profile')
     navDiv.classList.add('continer-fluid');
     navDiv.innerHTML = `
         <div class="container-fluid">
-          <a href="/feed.html"><i class="glyphicon glyphicon-camera"></i></a>
-          <a href="/profile.html">Profile</a>
-          <a href="/createpost.html">Create Post</a>
-          <span>Hi,${localStorage.username}</span>
-          <a href="/logout">logout</a>
+          <span class="label label-primary feed"> <a href="/feed.html"> Feed </a> </span>
+          <span class="label label-success profile"><a href="/profile.html"> Profile </a> </span>
+          <span class="label label-info post"> <a href="/post.html"> Post </a> </span>
+          <span class="welcome"> <strong> Hi, ${localStorage.username}</strong></span>
+          <span class="label label-danger right logout"><a href="/logout"> Logout </a></span>
         </div>
     `;
     navContainer.appendChild(navDiv);
